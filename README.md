@@ -27,6 +27,18 @@ There's also an optional turn timer for a faster-paced game.
 
 Node.js, Express, Socket.io for real-time sync, vanilla HTML/CSS/JS on the frontend. No database — game state lives in memory per room. Deployed on Render's free tier.
 
+## How it works (no-code explanation)
+
+**The "live together" part:** everyone opens the same link. One person creates a room and gets a 4-letter code; others type that code in to join. All devices connect to one server over a WebSocket — a connection that stays open the whole time, like a phone call instead of texting back and forth. Whenever someone gives a clue or clicks a card, that action goes to the server, the server updates the shared game state, and instantly pushes the update out to everyone else's screen. That's why nobody needs to refresh.
+
+**The board and roles:** the server picks 25 random words and secretly assigns each one a color (Red's, Blue's, neutral, or the assassin) — only the server knows the full picture at first. Spymasters get sent the full color key. Operatives only ever get sent the words — their browser literally never receives the colors, so there's no way to peek by inspecting the page. Double Agents secretly get the same full-color view as a spymaster, without their teammates knowing.
+
+**Getting it online:** the code lives here on GitHub. [Render](https://render.com) runs it on a small server and gives it a public address — that's the live link above. Free tier means it naps after 15 minutes of no traffic and takes ~30s to wake up on the next visit; after that it's instant.
+
+## Built with AI
+
+This project was designed and built with [Claude Code](https://claude.com/claude-code) (Anthropic). The game concept (Codenames + a hidden-traitor twist) was described in plain English — all the code (server logic, game rules, real-time sync, UI, deployment) was written, tested, and deployed by AI. No prior coding experience was needed to make this.
+
 ## Running locally
 
 ```
