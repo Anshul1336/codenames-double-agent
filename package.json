@@ -1,0 +1,16 @@
+{
+  "name": "codenames-game",
+  "version": "1.0.0",
+  "description": "Multiplayer word-guessing game, Codenames-style. Room code join, real-time play.",
+  "main": "server.js",
+  "engines": {
+    "node": ">=18"
+  },
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "socket.io": "^4.7.5"
+  }
+}

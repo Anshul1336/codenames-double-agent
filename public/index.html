@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Codenames: Double Agent</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+<div id="screen-home" class="screen active">
+  <div class="card">
+    <h1>Codenames<span class="tag">Double Agent</span></h1>
+    <p class="sub">A word-clue team game — with a hidden traitor twist.</p>
+    <input id="name-input" maxlength="20" placeholder="Your name" />
+    <button id="btn-create" class="primary">Create Room</button>
+    <div class="or">or</div>
+    <input id="code-input" maxlength="4" placeholder="ROOM CODE" style="text-transform:uppercase" />
+    <button id="btn-join">Join Room</button>
+    <p id="home-error" class="error"></p>
+  </div>
+</div>
+
+<div id="screen-lobby" class="screen">
+  <div class="card wide">
+    <h2>Room <span id="lobby-code"></span></h2>
+    <div class="settings" id="host-settings" style="display:none">
+      <label><input type="checkbox" id="chk-double" /> Double Agent mode (needs 3+ per team)</label>
+      <label><input type="checkbox" id="chk-timer" /> Turn timer</label>
+      <label id="timer-sec-wrap" style="display:none">Seconds: <input type="number" id="timer-sec" value="90" min="30" max="300" style="width:60px" /></label>
+    </div>
+    <div class="settings-view" id="guest-settings"></div>
+    <div class="teams">
+      <div class="team-col red">
+        <h3>Red</h3>
+        <div id="red-players" class="plist"></div>
+        <button data-team="red" class="join-team">Join Red</button>
+      </div>
+      <div class="team-col blue">
+        <h3>Blue</h3>
+        <div id="blue-players" class="plist"></div>
+        <button data-team="blue" class="join-team">Join Blue</button>
+      </div>
+    </div>
+    <div class="role-pick" id="role-pick" style="display:none">
+      <button data-role="spymaster" class="join-role">Be Spymaster</button>
+      <button data-role="operative" class="join-role">Be Operative</button>
+    </div>
+    <button id="btn-start" class="primary" style="display:none">Start Game</button>
+    <p id="lobby-error" class="error"></p>
+    <p class="hint">Share the room code with friends on their own phone/laptop to join.</p>
+  </div>
+</div>
+
+<div id="screen-game" class="screen">
+  <div class="topbar">
+    <div id="turn-banner" class="turn-banner"></div>
+    <div id="timer-display" class="timer-display"></div>
+    <div class="scores">
+      <span class="score red">Red: <span id="red-remaining">9</span></span>
+      <span class="score blue">Blue: <span id="blue-remaining">8</span></span>
+    </div>
+  </div>
+
+  <div id="role-banner" class="role-banner"></div>
+
+  <div id="board" class="board"></div>
+
+  <div id="clue-panel" class="clue-panel"></div>
+
+  <div class="log-panel">
+    <div id="log" class="log"></div>
+  </div>
+</div>
+
+<div id="screen-gameover" class="screen">
+  <div class="card wide">
+    <h2 id="go-title"></h2>
+    <p id="go-reason"></p>
+    <div id="go-double-agents"></div>
+    <button id="btn-again" class="primary">Back to Home</button>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script src="client.js"></script>
+</body>
+</html>
